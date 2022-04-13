@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class InpputandOutput {
@@ -20,21 +22,21 @@ public class InpputandOutput {
         return parameter;
     }
     protected static void printResult(String string, Integer parameter){
-        Student student1 = new JavaStudent("Ivanov Ivan",
-                LocalDate.of(2020,6,1));
+        JavaStudent student1 = new JavaStudent("Ivanov Ivan",
+                new GregorianCalendar(2020,Calendar.JUNE,1,10,0));
         AQAStudent student2 = new AQAStudent("Sidorov Ivan",
-                LocalDate.of(2020, 6, 1 ));
+                new GregorianCalendar(2020,Calendar.JUNE,1,10,0));
 
         if (string.equalsIgnoreCase(student1.getName())) {
             switch (parameter) {
-                case 0 -> System.out.println("Shortreport Ivanov");
-                case 1 -> System.out.println("Longreport Ivanov");
+                case 0 -> System.out.println(student1.getShortOutput());
+                case 1 -> System.out.println(student1.getLongOutput());
             }
         }
         else if (string.equalsIgnoreCase(student2.getName())){
             switch (parameter) {
-                case 0 -> System.out.println("Shortreport Sidorov");
-                case 1 -> System.out.println("Longreport Sidorov"+student2.getEndDate());
+                case 0 -> System.out.println(student2.getShortOutput());
+                case 1 -> System.out.println(student2.getLongOutput());
             }
         } else System.out.println("Введено несуществующее имя пользователя");
 
