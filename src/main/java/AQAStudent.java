@@ -8,7 +8,7 @@ public class AQAStudent extends Student {
     @Getter
     private final String CurriculumName = "J2EE Developer";
     @Getter
-    int duration = getSumHours();
+    int duration = Courses.AQACourseDuration();
     @Getter
     LocalDateTime endDate;
     @Getter
@@ -23,9 +23,9 @@ public class AQAStudent extends Student {
     String longOutput;
 
     String printCourseHours() {
-        return "\n" + Courses.PAGE_OBJECT + " " + Courses.PAGE_OBJECT.getHours() + " hours" +
-                "\n" + Courses.TEST_DESIGN + " " + Courses.TEST_DESIGN.getHours() + " hours" +
-                "\n" + Courses.SELENIUM + " " + Courses.SELENIUM.getHours() + " hours";
+        return "\nPage Object " + Courses.PAGE_OBJECT.getHours() + " hours" +
+                "\nTest design " + Courses.TEST_DESIGN.getHours() + " hours" +
+                "\nSelenium " + Courses.SELENIUM.getHours() + " hours";
     }
 
     AQAStudent(String name, LocalDateTime startDate) {
@@ -36,9 +36,4 @@ public class AQAStudent extends Student {
         shortOutput = createShortOutput(name, CurriculumName, howMuchIsLeft);
         longOutput = createLongReport(name, workingTime, CurriculumName, duration, printCourseHours(), startDate, endDate, howMuchIsLeft);
     }
-
-    int getSumHours() {
-        return Courses.SELENIUM.getHours() + Courses.TEST_DESIGN.getHours() + Courses.PAGE_OBJECT.getHours();
-    }
-
 }

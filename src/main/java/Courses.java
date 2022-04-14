@@ -7,6 +7,12 @@ public enum Courses {
     SELENIUM(16);
 
     final int hours;
+    static int javaDeveloperCourseDuration(){
+        return JAVA.hours+ JDBC.hours+ SPRING.hours;
+    }
+    static int AQACourseDuration(){
+        return TEST_DESIGN.hours+ PAGE_OBJECT.hours+SELENIUM.hours;
+    }
 
     int getHours() {
         return hours;

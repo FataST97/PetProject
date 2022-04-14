@@ -9,7 +9,7 @@ public class JavaStudent extends Student {
     @Getter
     private final String CurriculumName = "Java Developer";
     @Getter
-    int duration = getSumHours();
+    int duration = Courses.javaDeveloperCourseDuration();
     @Getter
     LocalDateTime endDate;
     @Getter
@@ -24,9 +24,9 @@ public class JavaStudent extends Student {
     String longOutput;
 
     String printCourseHours() {
-        return "\n" + Courses.JAVA + " " + Courses.JAVA.getHours() + " hours" +
-                "\n" + Courses.JDBC + " " + Courses.JDBC.getHours() + " hours" +
-                "\n" + Courses.SPRING + " " + Courses.SPRING.getHours() + " hours";
+        return "\nJava " + Courses.JAVA.getHours() + " hours" +
+                "\nJBDC " + Courses.JDBC.getHours() + " hours" +
+                "\nSpring " + Courses.SPRING.getHours() + " hours";
     }
 
     JavaStudent(String name, LocalDateTime startDate) {
@@ -37,10 +37,6 @@ public class JavaStudent extends Student {
         shortOutput = createShortOutput(name, CurriculumName, howMuchIsLeft);
         longOutput = createLongReport(name, workingTime, CurriculumName, duration, printCourseHours(), startDate, endDate, howMuchIsLeft);
 
-    }
-
-    int getSumHours() {
-        return Courses.JAVA.getHours() + Courses.JDBC.getHours() + Courses.SPRING.getHours();
     }
 }
 

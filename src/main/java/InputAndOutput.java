@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 public class InputAndOutput {
     protected static String readName(Scanner scan) {
-        System.out.println("Введите имя пользователя в формате - 'surname name'");
+        System.out.println("Enter student's name using the following example - 'surname name'");
         return scan.nextLine();
     }
 
     protected static int readParameter(Scanner scan) {
         int parameter;
-        System.out.println("Выберите параметр вывода 1 - полная информация ,   0 - сокращенная информация");
+        System.out.println("Choose an output option 1 - full info, 0 - short info");
         try {
             parameter = Integer.parseInt(scan.nextLine());
             if (parameter != 0) {

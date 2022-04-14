@@ -8,34 +8,34 @@ import static java.time.DayOfWeek.SUNDAY;
 abstract class Student {
     abstract String getName();
 
-    abstract String getCurriculumName();
+    //abstract String getCurriculumName();
 
-    abstract int getDuration();
+    //abstract int getDuration();
 
-    abstract LocalDateTime getEndDate();
+    //abstract LocalDateTime getEndDate();
 
-    abstract LocalDateTime getStartDate();
+    //abstract LocalDateTime getStartDate();
 
-    abstract String getWorkingTime();
+    //abstract String getWorkingTime();
 
-    abstract String getHowMuchIsLeft();
+    //abstract String getHowMuchIsLeft();
 
     abstract String getShortOutput();
 
     abstract String getLongOutput();
 
-    LocalDateTime presentDate = LocalDateTime.of(2020, Calendar.JUNE, 8,
+    public LocalDateTime presentDate = LocalDateTime.of(2020, Calendar.JUNE, 8,
             15, 0);
 
-    LocalDateTime calculateEndDate(LocalDateTime startDate, int duration) {
+    protected LocalDateTime calculateEndDate(LocalDateTime startDate, int duration) {
         LocalDateTime temporaryDate = startDate;
         int numOfDays = (int) Math.ceil(duration / 8.0);
         for (int i = 0; i < numOfDays; i++) {
             if (temporaryDate.getDayOfWeek() == SUNDAY
                     | temporaryDate.getDayOfWeek() == SATURDAY) {
                 numOfDays++;
-                temporaryDate = temporaryDate.plusDays(1);
-            } else temporaryDate = temporaryDate.plusDays(1);
+            }
+            temporaryDate = temporaryDate.plusDays(1);
         }
         LocalDateTime endDate = startDate.plusDays(numOfDays - 1);
         int howMuchHoursIsLeft = duration % 8;
@@ -46,7 +46,7 @@ abstract class Student {
     }
 
 
-    String calculateHowMuchTimeIsLeft(LocalDateTime presentDate, LocalDateTime endDate) {
+    protected String calculateHowMuchTimeIsLeft(LocalDateTime presentDate, LocalDateTime endDate) {
         int daysLeft = Math.abs(presentDate.getDayOfMonth() - endDate.getDayOfMonth());
         int hoursLeft = Math.abs(presentDate.getHour() - endDate.getHour());
         String outPut;
@@ -62,17 +62,17 @@ abstract class Student {
         return outPut;
     }
 
-    String createShortOutput(String name, String curriculumName, String howMuchTimeIsLeft) {
-        return name + " ( " + curriculumName + " )-" + howMuchTimeIsLeft;
+    protected String createShortOutput(String name, String curriculumName, String howMuchTimeIsLeft) {
+        return name + " (" + curriculumName + ")-" + howMuchTimeIsLeft;
     }
 
-    String createLongReport(String name, String workingTime, String curriculumName,
+    protected String createLongReport(String name, String workingTime, String curriculumName,
                             int duration, String printCourseHours, LocalDateTime startDate, LocalDateTime endDate, String howMuchTimeIsLeft) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMMM yyyy h:mm a");
         return "Student name - " + name +
                 "\nWorking time - " + workingTime +
                 "\nProgram name - " + curriculumName +
-                "\nProgram duration " + duration +
+                "\nProgram duration " + duration + " hours"+
                 "\nCourses: " + printCourseHours +
                 "\nStart date " + dtf.format(startDate) +
                 "\nEnd date " + dtf.format(endDate) +
