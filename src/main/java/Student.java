@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 class Student {
@@ -45,12 +43,13 @@ class Student {
     }
 
     String createLongReport (String name, String workingTime, String curriculumname,
-                             int duration, Calendar startdate, Calendar enddate, String isFinished) {
+                             int duration, String printCourseHours ,Calendar startdate, Calendar enddate, String isFinished) {
 
         return "Student name - "+ name +
                 "\nWorking time - "+ workingTime +
                 "\nProgram name - "+ curriculumname+
                 "\nProgram duration "+ duration+
+                "\nCourses: "+printCourseHours+
                 "\nStart date "+ startdate.getTime()+
                 "\nEnd date "+ enddate.getTime()+
                 "\n"+isFinished;

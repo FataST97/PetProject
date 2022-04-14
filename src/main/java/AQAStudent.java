@@ -1,7 +1,4 @@
 import lombok.Getter;
-
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -24,6 +21,12 @@ public class AQAStudent extends Student {
     String shortOutput;
     @Getter
     String longOutput;
+    String ptintCourseHours (){
+        return (
+                "\n"+Courses.PAGE_OBJECT+" "+Courses.PAGE_OBJECT.getHours()+" hours"+
+                        "\n"+Courses.TEST_DESIGN+" "+Courses.TEST_DESIGN.getHours()+" hours"+
+                        "\n"+Courses.SELENIUM+" "+Courses.SELENIUM.getHours()+" hours"
+        );}
 
 
 
@@ -33,7 +36,7 @@ public class AQAStudent extends Student {
         endDate = calcilateEndDate(this.startDate, duration);
         isFinished = calculateHowMuchTimeisLeft(presentDate,endDate);
         shortOutput = createShortOutput(name,CurriculumName,isFinished);
-        longOutput = createLongReport(name,workingTime,CurriculumName,duration,startDate,endDate,isFinished);
+        longOutput = createLongReport(name,workingTime,CurriculumName,duration,ptintCourseHours(), startDate,endDate,isFinished);
     }
 
     int getSumHours(){

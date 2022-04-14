@@ -1,5 +1,4 @@
 import lombok.Getter;
-import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 
 public class JavaStudent extends Student {
@@ -22,6 +21,14 @@ public class JavaStudent extends Student {
     @Getter
     String longOutput;
 
+    String ptintCourseHours (){
+        return (
+                "\n"+Courses.JAVA+" "+Courses.JAVA.getHours()+" hours"+
+                "\n"+Courses.JDBC+" "+Courses.JDBC.getHours()+" hours"+
+                "\n"+Courses.SPRING+" "+Courses.SPRING.getHours()+" hours"
+        );}
+
+
 
 
     JavaStudent(String name,Calendar startDate){
@@ -30,7 +37,7 @@ public class JavaStudent extends Student {
         endDate = calcilateEndDate(this.startDate, duration);
         isFinished = calculateHowMuchTimeisLeft(presentDate,endDate);
         shortOutput = createShortOutput(name,CurriculumName,isFinished);
-        longOutput = createLongReport(name,workingTime,CurriculumName,duration,startDate,endDate,isFinished);
+        longOutput = createLongReport(name,workingTime,CurriculumName,duration,ptintCourseHours(),startDate,endDate,isFinished);
 
 
     }
@@ -38,7 +45,10 @@ public class JavaStudent extends Student {
         return Courses.JAVA.getHours()+Courses.JDBC.getHours()+Courses.SPRING.getHours();
     }
 
-}
+
+    }
+
+
 
 
 

@@ -1,6 +1,3 @@
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
-
 public enum Courses {
     JAVA(16),
     JDBC(24),
@@ -9,7 +6,7 @@ public enum Courses {
     PAGE_OBJECT(16),
     SELENIUM(16);
 
-    int hours;
+    final int hours;
     int getHours(){
         return hours;
     }
