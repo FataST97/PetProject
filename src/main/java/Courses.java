@@ -7,14 +7,13 @@ public enum Courses {
     SELENIUM(16);
 
     final int hours;
-    int getHours(){
+
+    int getHours() {
         return hours;
     }
 
-
-    Courses(int hours){
+    Courses(int hours) {
         this.hours = hours;
-
     }
 }
 

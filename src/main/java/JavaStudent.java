@@ -15,38 +15,32 @@ public class JavaStudent extends Student {
     @Getter
     String workingTime = "8-hour school day from 10 to 18";
     @Getter
-    String isFinished ;
+    String howMuchIsLeft;
     @Getter
     String shortOutput;
     @Getter
     String longOutput;
 
-    String ptintCourseHours (){
-        return (
-                "\n"+Courses.JAVA+" "+Courses.JAVA.getHours()+" hours"+
-                "\n"+Courses.JDBC+" "+Courses.JDBC.getHours()+" hours"+
-                "\n"+Courses.SPRING+" "+Courses.SPRING.getHours()+" hours"
-        );}
+    String printCourseHours() {
+        return "\n" + Courses.JAVA + " " + Courses.JAVA.getHours() + " hours" +
+                "\n" + Courses.JDBC + " " + Courses.JDBC.getHours() + " hours" +
+                "\n" + Courses.SPRING + " " + Courses.SPRING.getHours() + " hours";
+    }
 
-
-
-
-    JavaStudent(String name,Calendar startDate){
+    JavaStudent(String name, Calendar startDate) {
         this.name = name;
         this.startDate = startDate;
-        endDate = calcilateEndDate(this.startDate, duration);
-        isFinished = calculateHowMuchTimeisLeft(presentDate,endDate);
-        shortOutput = createShortOutput(name,CurriculumName,isFinished);
-        longOutput = createLongReport(name,workingTime,CurriculumName,duration,ptintCourseHours(),startDate,endDate,isFinished);
-
-
-    }
-    int getSumHours(){
-        return Courses.JAVA.getHours()+Courses.JDBC.getHours()+Courses.SPRING.getHours();
-    }
-
+        endDate = calculateEndDate(startDate, duration);
+        howMuchIsLeft = calculateHowMuchTimeIsLeft(presentDate, endDate);
+        shortOutput = createShortOutput(name, CurriculumName, howMuchIsLeft);
+        longOutput = createLongReport(name, workingTime, CurriculumName, duration, printCourseHours(), startDate, endDate, howMuchIsLeft);
 
     }
+
+    int getSumHours() {
+        return Courses.JAVA.getHours() + Courses.JDBC.getHours() + Courses.SPRING.getHours();
+    }
+}
 
 
 
