@@ -1,4 +1,6 @@
 import lombok.Getter;
+
+import java.time.LocalDateTime;
 import java.util.Calendar;
 
 public class JavaStudent extends Student {
@@ -9,9 +11,9 @@ public class JavaStudent extends Student {
     @Getter
     int duration = getSumHours();
     @Getter
-    Calendar endDate;
+    LocalDateTime endDate;
     @Getter
-    Calendar startDate;
+    LocalDateTime startDate;
     @Getter
     String workingTime = "8-hour school day from 10 to 18";
     @Getter
@@ -27,7 +29,7 @@ public class JavaStudent extends Student {
                 "\n" + Courses.SPRING + " " + Courses.SPRING.getHours() + " hours";
     }
 
-    JavaStudent(String name, Calendar startDate) {
+    JavaStudent(String name, LocalDateTime startDate) {
         this.name = name;
         this.startDate = startDate;
         endDate = calculateEndDate(startDate, duration);

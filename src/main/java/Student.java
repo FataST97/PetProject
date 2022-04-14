@@ -1,5 +1,9 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
+
+import static java.time.DayOfWeek.SATURDAY;
+import static java.time.DayOfWeek.SUNDAY;
 
 abstract class Student {
     abstract String getName();
@@ -8,9 +12,9 @@ abstract class Student {
 
     abstract int getDuration();
 
-    abstract Calendar getEndDate();
+    abstract LocalDateTime getEndDate();
 
-    abstract Calendar getStartDate();
+    abstract LocalDateTime getStartDate();
 
     abstract String getWorkingTime();
 
@@ -20,38 +24,37 @@ abstract class Student {
 
     abstract String getLongOutput();
 
-    Calendar presentDate = new GregorianCalendar(2020, Calendar.JUNE, 8,
+    LocalDateTime presentDate = LocalDateTime.of(2020, Calendar.JUNE, 8,
             15, 0);
 
-    Calendar calculateEndDate(Calendar startDate, int duration) {
-        Calendar temporary = (Calendar) startDate.clone();
-        Calendar endDate = (Calendar) startDate.clone();
-        int numofdays = (int) Math.ceil(duration / 8.0);
-        for (int i = 0; i < numofdays; i++) {
-            if (temporary.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY
-                    | temporary.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
-                numofdays += 1;
-            }
-            temporary.add(Calendar.DATE, 1);
+    LocalDateTime calculateEndDate(LocalDateTime startDate, int duration) {
+        LocalDateTime temporaryDate = startDate;
+        int numOfDays = (int) Math.ceil(duration / 8.0);
+        for (int i = 0; i < numOfDays; i++) {
+            if (temporaryDate.getDayOfWeek() == SUNDAY
+                    | temporaryDate.getDayOfWeek() == SATURDAY) {
+                numOfDays++;
+                temporaryDate = temporaryDate.plusDays(1);
+            } else temporaryDate = temporaryDate.plusDays(1);
         }
-        endDate.add(Calendar.DATE, (numofdays - 1));
-        int howMuchTimeIsLeft = duration % 8;
-        if (howMuchTimeIsLeft == 0) {
-            endDate.set(Calendar.HOUR, 18);
-        } else endDate.add(Calendar.HOUR, howMuchTimeIsLeft);
+        LocalDateTime endDate = startDate.plusDays(numOfDays - 1);
+        int howMuchHoursIsLeft = duration % 8;
+        if (howMuchHoursIsLeft == 0) {
+            endDate = endDate.plusHours(8);
+        } else endDate = endDate.plusHours(howMuchHoursIsLeft);
         return endDate;
     }
 
 
-    String calculateHowMuchTimeIsLeft(Calendar presentDate, Calendar endDate) {
-        int daysLeft = Math.abs(presentDate.get(Calendar.DATE) - endDate.get(Calendar.DATE));
-        int hoursLeft = Math.abs(presentDate.get(Calendar.HOUR) - endDate.get(Calendar.HOUR));
+    String calculateHowMuchTimeIsLeft(LocalDateTime presentDate, LocalDateTime endDate) {
+        int daysLeft = Math.abs(presentDate.getDayOfMonth() - endDate.getDayOfMonth());
+        int hoursLeft = Math.abs(presentDate.getHour() - endDate.getHour());
         String outPut;
-        if (presentDate.after(endDate) && daysLeft == 0) {
+        if (presentDate.isAfter(endDate) && daysLeft == 0) {
             outPut = "Training completed. " + hoursLeft + " hours have passed since the end";
-        } else if (presentDate.after(endDate) && daysLeft != 0) {
+        } else if (presentDate.isAfter(endDate) && daysLeft != 0) {
             outPut = "Training completed. " + daysLeft + " d " + hoursLeft + " hours have passed since the end";
-        } else if (presentDate.before(endDate) && daysLeft == 0) {
+        } else if (presentDate.isBefore(endDate) && daysLeft == 0) {
             outPut = "Training is not finished. " + hoursLeft + " hours are left until the end.";
         } else {
             outPut = "Training is not finished. " + daysLeft + " d " + hoursLeft + " hours are left until the end.";
@@ -59,22 +62,20 @@ abstract class Student {
         return outPut;
     }
 
-    String createShortOutput(String name, String curriculumName, String isFinished) {
-        return name + " ( " + curriculumName + " )-" + isFinished;
+    String createShortOutput(String name, String curriculumName, String howMuchTimeIsLeft) {
+        return name + " ( " + curriculumName + " )-" + howMuchTimeIsLeft;
     }
 
     String createLongReport(String name, String workingTime, String curriculumName,
-                            int duration, String printCourseHours, Calendar startDate, Calendar endDate, String isFinished) {
-
+                            int duration, String printCourseHours, LocalDateTime startDate, LocalDateTime endDate, String howMuchTimeIsLeft) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMMM yyyy h:mm a");
         return "Student name - " + name +
                 "\nWorking time - " + workingTime +
                 "\nProgram name - " + curriculumName +
                 "\nProgram duration " + duration +
                 "\nCourses: " + printCourseHours +
-                "\nStart date " + startDate.getTime() +
-                "\nEnd date " + endDate.getTime() +
-                "\n" + isFinished;
+                "\nStart date " + dtf.format(startDate) +
+                "\nEnd date " + dtf.format(endDate) +
+                "\n" + howMuchTimeIsLeft;
     }
-
-
 }

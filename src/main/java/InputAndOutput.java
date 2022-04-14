@@ -1,5 +1,5 @@
+import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class InputAndOutput {
@@ -24,9 +24,9 @@ public class InputAndOutput {
 
     protected static void printResult(String studentName, Integer parameter) {
         Student student1 = new JavaStudent("Ivanov Ivan",
-                new GregorianCalendar(2020, Calendar.JUNE, 1, 10, 0));
+                LocalDateTime.of(2020, 6, 1, 10, 0));
         Student student2 = new AQAStudent("Sidorov Ivan",
-                new GregorianCalendar(2020, Calendar.JUNE, 1, 10, 0));
+                LocalDateTime.of(2020, Calendar.JUNE, 1, 10, 0));
 
         if (studentName.equalsIgnoreCase(student1.getName())) {
             switch (parameter) {

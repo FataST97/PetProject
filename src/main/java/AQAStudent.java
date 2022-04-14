@@ -1,7 +1,6 @@
 import lombok.Getter;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
 
 public class AQAStudent extends Student {
     @Getter
@@ -11,9 +10,9 @@ public class AQAStudent extends Student {
     @Getter
     int duration = getSumHours();
     @Getter
-    Calendar endDate;
+    LocalDateTime endDate;
     @Getter
-    Calendar startDate;
+    LocalDateTime startDate;
     @Getter
     String workingTime = "8-hour school day from 10 to 18";
     @Getter
@@ -29,7 +28,7 @@ public class AQAStudent extends Student {
                 "\n" + Courses.SELENIUM + " " + Courses.SELENIUM.getHours() + " hours";
     }
 
-    AQAStudent(String name, GregorianCalendar startDate) {
+    AQAStudent(String name, LocalDateTime startDate) {
         this.name = name;
         this.startDate = startDate;
         endDate = calculateEndDate(startDate, duration);
