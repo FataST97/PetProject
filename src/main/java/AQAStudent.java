@@ -1,5 +1,4 @@
 import lombok.Getter;
-
 import java.time.LocalDateTime;
 
 public class AQAStudent extends Student {
@@ -16,11 +15,19 @@ public class AQAStudent extends Student {
     @Getter
     String workingTime = "8-hour school day from 10 to 18";
     @Getter
-    String howMuchIsLeft;
+    int[] howMuchIsLeft;
     @Getter
     String shortOutput;
     @Getter
     String longOutput;
+    @Getter
+    String isFinishedText;
+    boolean isFinished;
+
+    @Override
+    boolean getIsFinished() {
+        return isFinished;
+    }
 
     String printCourseHours() {
         return "\nPage Object " + Courses.PAGE_OBJECT.getHours() + " hours" +
@@ -33,7 +40,9 @@ public class AQAStudent extends Student {
         this.startDate = startDate;
         endDate = calculateEndDate(startDate, duration);
         howMuchIsLeft = calculateHowMuchTimeIsLeft(presentDate, endDate);
-        shortOutput = createShortOutput(name, CurriculumName, howMuchIsLeft);
-        longOutput = createLongReport(name, workingTime, CurriculumName, duration, printCourseHours(), startDate, endDate, howMuchIsLeft);
+        isFinished = isFinished(presentDate, endDate);
+        isFinishedText = createIsFinishedText(howMuchIsLeft, isFinished);
+        shortOutput = createShortOutput(name, CurriculumName, isFinishedText);
+        longOutput = createLongReport(name, workingTime, CurriculumName, duration, printCourseHours(), startDate, endDate, isFinishedText);
     }
 }

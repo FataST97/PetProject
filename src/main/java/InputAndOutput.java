@@ -1,5 +1,4 @@
 import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.Scanner;
 
 public class InputAndOutput {
@@ -26,7 +25,7 @@ public class InputAndOutput {
         Student student1 = new JavaStudent("Ivanov Ivan",
                 LocalDateTime.of(2020, 6, 1, 10, 0));
         Student student2 = new AQAStudent("Sidorov Ivan",
-                LocalDateTime.of(2020, Calendar.JUNE, 1, 10, 0));
+                LocalDateTime.of(2020, 6, 1, 10, 0));
 
         if (studentName.equalsIgnoreCase(student1.getName())) {
             switch (parameter) {

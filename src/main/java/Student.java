@@ -1,30 +1,24 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 
 import static java.time.DayOfWeek.SATURDAY;
 import static java.time.DayOfWeek.SUNDAY;
 
 abstract class Student {
+
     abstract String getName();
 
-    //abstract String getCurriculumName();
+    abstract LocalDateTime getEndDate();
 
-    //abstract int getDuration();
-
-    //abstract LocalDateTime getEndDate();
-
-    //abstract LocalDateTime getStartDate();
-
-    //abstract String getWorkingTime();
-
-    //abstract String getHowMuchIsLeft();
+    abstract int[] getHowMuchIsLeft();
 
     abstract String getShortOutput();
 
     abstract String getLongOutput();
 
-    public LocalDateTime presentDate = LocalDateTime.of(2020, Calendar.JUNE, 8,
+    abstract boolean getIsFinished();
+
+    public LocalDateTime presentDate = LocalDateTime.of(2020, 6, 8,
             15, 0);
 
     protected LocalDateTime calculateEndDate(LocalDateTime startDate, int duration) {
@@ -45,37 +39,42 @@ abstract class Student {
         return endDate;
     }
 
-
-    protected String calculateHowMuchTimeIsLeft(LocalDateTime presentDate, LocalDateTime endDate) {
+    protected int[] calculateHowMuchTimeIsLeft(LocalDateTime presentDate, LocalDateTime endDate) {
         int daysLeft = Math.abs(presentDate.getDayOfMonth() - endDate.getDayOfMonth());
         int hoursLeft = Math.abs(presentDate.getHour() - endDate.getHour());
-        String outPut;
-        if (presentDate.isAfter(endDate) && daysLeft == 0) {
-            outPut = "Training completed. " + hoursLeft + " hours have passed since the end";
-        } else if (presentDate.isAfter(endDate) && daysLeft != 0) {
-            outPut = "Training completed. " + daysLeft + " d " + hoursLeft + " hours have passed since the end";
-        } else if (presentDate.isBefore(endDate) && daysLeft == 0) {
-            outPut = "Training is not finished. " + hoursLeft + " hours are left until the end.";
-        } else {
-            outPut = "Training is not finished. " + daysLeft + " d " + hoursLeft + " hours are left until the end.";
-        }
-        return outPut;
+        return new int[]{daysLeft, hoursLeft};
     }
 
-    protected String createShortOutput(String name, String curriculumName, String howMuchTimeIsLeft) {
-        return name + " (" + curriculumName + ")-" + howMuchTimeIsLeft;
+    protected boolean isFinished(LocalDateTime presentDate, LocalDateTime endDate) {
+        return presentDate.isAfter(endDate);
+    }
+
+    protected String createShortOutput(String name, String curriculumName, String isFinishedText) {
+        return name + " (" + curriculumName + ")-" + isFinishedText;
+    }
+
+    protected String createIsFinishedText(int[] howMuchTimeIsLeft, boolean isFinished) {
+        if (isFinished && howMuchTimeIsLeft[0] == 0)
+            return "Training completed. " + howMuchTimeIsLeft[1] + " hours have passed since the end";
+        else if (isFinished)
+            return "Training completed. " + howMuchTimeIsLeft[0] + " d " + howMuchTimeIsLeft[1] + " hours have passed since the end";
+        else if (howMuchTimeIsLeft[0] == 0)
+            return "Training is not finished. " + howMuchTimeIsLeft[1] + " hours are left until the end";
+        else
+            return "Training is not finished. " + howMuchTimeIsLeft[0] + " d " + howMuchTimeIsLeft[1] + " hours are left until the end";
     }
 
     protected String createLongReport(String name, String workingTime, String curriculumName,
-                            int duration, String printCourseHours, LocalDateTime startDate, LocalDateTime endDate, String howMuchTimeIsLeft) {
+                                      int duration, String printCourseHours, LocalDateTime startDate,
+                                      LocalDateTime endDate, String isFinishedText) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMMM yyyy h:mm a");
         return "Student name - " + name +
                 "\nWorking time - " + workingTime +
                 "\nProgram name - " + curriculumName +
-                "\nProgram duration " + duration + " hours"+
+                "\nProgram duration " + duration + " hours" +
                 "\nCourses: " + printCourseHours +
                 "\nStart date " + dtf.format(startDate) +
                 "\nEnd date " + dtf.format(endDate) +
-                "\n" + howMuchTimeIsLeft;
+                "\n" + isFinishedText;
     }
 }
