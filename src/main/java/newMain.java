@@ -5,6 +5,6 @@ public class newMain extends InputAndOutput {
         Scanner scan = new Scanner(System.in);
         String name = readName(scan);
         Integer parameter = readParameter(scan);
-        printResult(name, parameter);
+        System.out.println(resultString(name, parameter));
     }
 }

@@ -21,22 +21,28 @@ public class InputAndOutput {
         return parameter;
     }
 
-    protected static void printResult(String studentName, Integer parameter) {
+    protected static String resultString(String studentName, Integer parameter) {
         Student student1 = new JavaStudent("Ivanov Ivan",
                 LocalDateTime.of(2020, 6, 1, 10, 0));
         Student student2 = new AQAStudent("Sidorov Ivan",
                 LocalDateTime.of(2020, 6, 1, 10, 0));
+        String result = "";
 
         if (studentName.equalsIgnoreCase(student1.getName())) {
             switch (parameter) {
-                case 0 -> System.out.println(student1.getShortOutput());
-                case 1 -> System.out.println(student1.getLongOutput());
+                case 0:
+                    return result = student1.getShortOutput();
+                case 1:
+                    return result=student1.getLongOutput();
             }
         } else if (studentName.equalsIgnoreCase(student2.getName())) {
             switch (parameter) {
-                case 0 -> System.out.println(student2.getShortOutput());
-                case 1 -> System.out.println(student2.getLongOutput());
+                case 0:
+                    return result = student2.getShortOutput();
+                case 1:
+                    return result=student2.getLongOutput();
             }
-        } else System.out.println("Введено несуществующее имя пользователя");
+        } else return "Error, Wrong user name";
+    return result;
     }
 }

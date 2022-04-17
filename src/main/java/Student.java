@@ -50,7 +50,7 @@ abstract class Student {
     }
 
     protected String createShortOutput(String name, String curriculumName, String isFinishedText) {
-        return name + " (" + curriculumName + ")-" + isFinishedText;
+        return "Short report: "+ name + " (" + curriculumName + ")-" + isFinishedText;
     }
 
     protected String createIsFinishedText(int[] howMuchTimeIsLeft, boolean isFinished) {
@@ -68,7 +68,8 @@ abstract class Student {
                                       int duration, String printCourseHours, LocalDateTime startDate,
                                       LocalDateTime endDate, String isFinishedText) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMMM yyyy h:mm a");
-        return "Student name - " + name +
+        return "Long report: "+
+                "\nStudent name - " + name +
                 "\nWorking time - " + workingTime +
                 "\nProgram name - " + curriculumName +
                 "\nProgram duration " + duration + " hours" +

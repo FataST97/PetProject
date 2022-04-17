@@ -34,6 +34,23 @@ public class PetTest {
         Assert.assertFalse(student1.getIsFinished());
         Assert.assertTrue(student2.getIsFinished());
     }
+
+    @Test
+    public void testPrintResult(){
+        String studentNameJava = "Ivanov Ivan";
+        int parameterOne = 1;
+        String studentNameAQA= "Sidorov Ivan";
+        int parameterZero = 0;
+        Assert.assertTrue(InputAndOutput.resultString(studentNameJava,parameterOne).startsWith("Long report: "));
+        Assert.assertTrue(InputAndOutput.resultString(studentNameAQA,parameterZero).contains("Short report: "));
+    }
+
+    @Test
+    public void testWrongStudentName(){
+        String studentName = "Wrong Name";
+        int parameter = 1;
+        Assert.assertTrue(InputAndOutput.resultString(studentName,parameter).contains("Error"));
+    }
 }
 
 
