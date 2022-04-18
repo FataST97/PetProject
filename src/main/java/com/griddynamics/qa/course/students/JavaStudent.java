@@ -1,3 +1,6 @@
+package com.griddynamics.qa.course.students;
+
+import com.griddynamics.qa.course.students.courses.Courses;
 import lombok.Getter;
 import java.time.LocalDateTime;
 
@@ -7,25 +10,23 @@ public class JavaStudent extends Student {
     @Getter
     private final String CurriculumName = "Java Developer";
     @Getter
-    int duration = Courses.javaDeveloperCourseDuration();
+    private final int duration = Courses.javaDeveloperCourseDuration();
     @Getter
-    LocalDateTime endDate;
+    private final LocalDateTime endDate;
     @Getter
-    LocalDateTime startDate;
+    private final LocalDateTime startDate;
     @Getter
-    String workingTime = "8-hour school day from 10 to 18";
+    private final int[] howMuchIsLeft;
     @Getter
-    int[] howMuchIsLeft;
+    private final String shortOutput;
     @Getter
-    String shortOutput;
+    private final String longOutput;
     @Getter
-    String longOutput;
-    @Getter
-    String isFinishedText;
-    boolean isFinished;
+    private final String isFinishedText;
+    private final boolean isFinished;
 
     @Override
-    boolean getIsFinished() {
+    public boolean getIsFinished() {
         return isFinished;
     }
 
@@ -35,7 +36,7 @@ public class JavaStudent extends Student {
                 "\nSpring " + Courses.SPRING.getHours() + " hours";
     }
 
-    JavaStudent(String name, LocalDateTime startDate) {
+    public JavaStudent(String name, LocalDateTime startDate) {
         this.name = name;
         this.startDate = startDate;
         endDate = calculateEndDate(startDate, duration);
@@ -43,7 +44,7 @@ public class JavaStudent extends Student {
         isFinished = isFinished(presentDate, endDate);
         isFinishedText = createIsFinishedText(howMuchIsLeft, isFinished);
         shortOutput = createShortOutput(name, CurriculumName, isFinishedText);
-        longOutput = createLongReport(name, workingTime, CurriculumName, duration, printCourseHours(), startDate, endDate, isFinishedText);
+        longOutput = createLongReport(name, CurriculumName, duration, printCourseHours(), startDate, endDate, isFinishedText);
     }
 }
 

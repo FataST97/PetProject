@@ -1,3 +1,9 @@
+package com.griddynamics.qa.course.pettests;
+
+import com.griddynamics.qa.course.students.AQAStudent;
+import com.griddynamics.qa.course.students.InputAndOutput;
+import com.griddynamics.qa.course.students.JavaStudent;
+import com.griddynamics.qa.course.students.Student;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

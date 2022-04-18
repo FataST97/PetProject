@@ -1,3 +1,5 @@
+package com.griddynamics.qa.course.students;
+
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
@@ -21,7 +23,7 @@ public class InputAndOutput {
         return parameter;
     }
 
-    protected static String resultString(String studentName, Integer parameter) {
+    public static String resultString(String studentName, Integer parameter) {
         Student student1 = new JavaStudent("Ivanov Ivan",
                 LocalDateTime.of(2020, 6, 1, 10, 0));
         Student student2 = new AQAStudent("Sidorov Ivan",

@@ -1,22 +1,24 @@
+package com.griddynamics.qa.course.students;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static java.time.DayOfWeek.SATURDAY;
 import static java.time.DayOfWeek.SUNDAY;
 
-abstract class Student {
+public abstract class Student {
 
     abstract String getName();
 
-    abstract LocalDateTime getEndDate();
+    public abstract LocalDateTime getEndDate();
 
-    abstract int[] getHowMuchIsLeft();
+    public abstract int[] getHowMuchIsLeft();
 
     abstract String getShortOutput();
 
     abstract String getLongOutput();
 
-    abstract boolean getIsFinished();
+    public abstract boolean getIsFinished();
 
     public LocalDateTime presentDate = LocalDateTime.of(2020, 6, 8,
             15, 0);
@@ -64,16 +66,16 @@ abstract class Student {
             return "Training is not finished. " + howMuchTimeIsLeft[0] + " d " + howMuchTimeIsLeft[1] + " hours are left until the end";
     }
 
-    protected String createLongReport(String name, String workingTime, String curriculumName,
+    protected String createLongReport(String name, String curriculumName,
                                       int duration, String printCourseHours, LocalDateTime startDate,
                                       LocalDateTime endDate, String isFinishedText) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMMM yyyy h:mm a");
         return "Long report: "+
-                "\nStudent name - " + name +
-                "\nWorking time - " + workingTime +
+                "\ncom.griddynamics.qa.course.students.Student name - " + name +
+                "\nWorking time - " + "8-hour school day from 10 to 18" +
                 "\nProgram name - " + curriculumName +
                 "\nProgram duration " + duration + " hours" +
-                "\nCourses: " + printCourseHours +
+                "\ncom.griddynamics.qa.course.students.courses.Courses: " + printCourseHours +
                 "\nStart date " + dtf.format(startDate) +
                 "\nEnd date " + dtf.format(endDate) +
                 "\n" + isFinishedText;

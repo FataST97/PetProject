@@ -1,3 +1,6 @@
+package com.griddynamics.qa.course.students;
+
+import com.griddynamics.qa.course.students.courses.Courses;
 import lombok.Getter;
 import java.time.LocalDateTime;
 
@@ -7,35 +10,33 @@ public class AQAStudent extends Student {
     @Getter
     private final String CurriculumName = "J2EE Developer";
     @Getter
-    int duration = Courses.AQACourseDuration();
+    private final int duration = Courses.AQACourseDuration();
     @Getter
-    LocalDateTime endDate;
+    private final LocalDateTime endDate;
     @Getter
-    LocalDateTime startDate;
+    private final LocalDateTime startDate;
     @Getter
-    String workingTime = "8-hour school day from 10 to 18";
+    private final int[] howMuchIsLeft;
     @Getter
-    int[] howMuchIsLeft;
+    private final String shortOutput;
     @Getter
-    String shortOutput;
+    private final String longOutput;
     @Getter
-    String longOutput;
-    @Getter
-    String isFinishedText;
-    boolean isFinished;
+    private final String isFinishedText;
+    private final boolean isFinished;
 
     @Override
-    boolean getIsFinished() {
+    public boolean getIsFinished() {
         return isFinished;
     }
 
-    String printCourseHours() {
+    protected String printCourseHours() {
         return "\nPage Object " + Courses.PAGE_OBJECT.getHours() + " hours" +
                 "\nTest design " + Courses.TEST_DESIGN.getHours() + " hours" +
                 "\nSelenium " + Courses.SELENIUM.getHours() + " hours";
     }
 
-    AQAStudent(String name, LocalDateTime startDate) {
+    public AQAStudent(String name, LocalDateTime startDate) {
         this.name = name;
         this.startDate = startDate;
         endDate = calculateEndDate(startDate, duration);
@@ -43,6 +44,6 @@ public class AQAStudent extends Student {
         isFinished = isFinished(presentDate, endDate);
         isFinishedText = createIsFinishedText(howMuchIsLeft, isFinished);
         shortOutput = createShortOutput(name, CurriculumName, isFinishedText);
-        longOutput = createLongReport(name, workingTime, CurriculumName, duration, printCourseHours(), startDate, endDate, isFinishedText);
+        longOutput = createLongReport(name, CurriculumName, duration, printCourseHours(), startDate, endDate, isFinishedText);
     }
 }
